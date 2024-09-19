@@ -1,27 +1,20 @@
 <div class="top-menu">
-
-    <img class="logo"
-         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-
+  <img
+    class="logo"
+    src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
+  />
 </div>
 
-
-
+<!-- Le DIRETTIVE STRUTTURALI come ngIf, ngFor, ngSwitch cambiano il dom aggiungendo o rimuovendo elementi, componenti o altre direttive -->
+<!-- Le ATTRIBUTE DIRECTIVES sono ad esempio NgClass, NgStyle ed NgModel, cambiano l'aspetto o il comportamento di un elemento, componente o altre direttive -->
+<!-- per creare una direttiva custom utilizzo il comando ng g directive directives/highlighted, sto generando una direttiva chiamata highlighted nella cartella directives nella cartella src/app -->
+<!-- una direttiva è una classe ts -->
 <div class="courses" *ngIf="courses[0] as course">
+  <course-card (courseSelected)="onCourseSelected($event)" [course]="course">
+    <course-image [src]="course.iconUrl"></course-image>
 
-    <course-card
-            (courseSelected)="onCourseSelected($event)"
-                 [course]="course">
-
-        <course-image [src]="course.iconUrl"></course-image>
-
-        <div class="course-description">
-            {{ course.longDescription }}
-        </div>
-
-    </course-card>
-
-
+    <div class="course-description">
+      {{ course.longDescription }}
+    </div>
+  </course-card>
 </div>
-
-
