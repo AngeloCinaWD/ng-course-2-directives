@@ -11,8 +11,12 @@ import {
 // in una direttiva c'è il decorator @Directive
 // il selector è il nome con cui verrà utilizzta la direttiva, passandolo come attributo all'elemento nel template
 // ad es. <div highlighted></div>
+// è possibile esportare una direttiva per poetrvi accedere direttamente in un template o in una classe ts
+// ad esempio pechè la direttiva contiene dei metodi che vogliono essere utilizzati
+// si fa utilizzando la proprietà exportAs nel decoratore @Directive e assegnandole un nome che verrà utilizzato nel template
 @Directive({
   selector: "[highlighted]",
+  exportAs: "direttivaHL",
 })
 export class HighlightedDirective {
   // posso passare valori dall'esterno alla direttiva ed utilizzarli nei metodi
@@ -42,7 +46,7 @@ export class HighlightedDirective {
 
   @HostBinding("className")
   get cssClasses() {
-    return "highlighted";
+    return "highlighted course-card";
   }
 
   // mettendo più metodi posso far fare più cose alla direttiva
@@ -79,7 +83,7 @@ export class HighlightedDirective {
   // @HOSTLISTENER DECORATOR
   // ascoltare eventi in una direttiva, in argomento il nome dell'evento che si scatena sull'elemento
   // non devono essere metodi GET, questi vengono richiamati al verificarsi dell'evento
-  // modificando il valore dell'@Input verrà chiamato il metodo get getValueIsHighlighted() che rotorna vero o falso per aggiungere una classe tramite shorthand class.nomeClasse
+  // modificando il valore dell'@Input verrà chiamato il metodo get getValueIsHighlighted() che ritorna vero o falso per aggiungere una classe tramite shorthand class.nomeClasse
   // possiamo passare un array come secondo argomento del decorator per passare argomenti al metodo
   // uno è $event che ci dà informazioni sull'evento triggerato, il secondo lo sto passando per prova e gli devo assegnare il valore nel metodo
   @HostListener("mouseover", ["$event", "ciao"])
@@ -95,6 +99,12 @@ export class HighlightedDirective {
   @HostListener("mouseleave")
   mouseLeave() {
     this.isHighlighted = false;
+    this.toggleIsHighLighted.emit(this.isHighlighted);
+  }
+
+  // METODO CHE UTILIZZERO' NEL TEMPLATE
+  toggle() {
+    this.isHighlighted = !this.isHighlighted;
     this.toggleIsHighLighted.emit(this.isHighlighted);
   }
 }

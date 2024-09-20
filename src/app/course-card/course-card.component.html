@@ -1,4 +1,6 @@
-<div class="course-card" *ngIf="course" #container>
+<!-- <div class="course-card" *ngIf="course" #container> -->
+<!-- HO TOLTO LA CLASSE DA QUI E L'HO ASSEGNATA TRAMITE DIRETTIVA AL COMPONENT ALTRIMENTI AVEVO PROBLEMI CON I BORDER -->
+<div *ngIf="course" #container>
   <div class="course-title">
     {{ cardIndex || "" + " " + course.description }}
   </div>

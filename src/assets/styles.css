@@ -85,7 +85,7 @@ course-card.is-odd {
     0 6px 8px -1px #b41c18;
 }
 
-/* classe aggiunta da me per provare gli eventi del mouse nella direttiva */
+/* classe aggiunta da me per provare gli eventi del mouse nella */
 .highlightedMouse {
   box-shadow: 0 2px 16px 0 #dedb19, 0 3px 8px 0 rgba(226, 209, 19, 0.47),
     0 6px 8px -1px #b1b418;
