@@ -26,7 +26,12 @@ export class AppComponent implements AfterViewInit {
 
   constructor() {}
 
-  // da qui se vedo l'oggetto nativeElement corrispondente all'elemento trovo fra le sue proprietà classList che mi elenca le classi ad esso associate (un array di stringhe), mentre className mi restituisce una stringa con le classi
+  // METODO RICHIAMATO DALL'EVENTO CUSTOM toggleIsHighLighted DELLA DIRETTIVA highlighted
+  onToggle($event) {
+    console.log($event);
+  }
+
+  // da qui, se vedo l'oggetto nativeElement corrispondente all'elemento trovo fra le sue proprietà classList che mi elenca le classi ad esso associate (un array di stringhe), mentre className mi restituisce una stringa con le classi
   ngAfterViewInit() {
     console.log(this.prova.nativeElement.classList);
     console.log(this.prova.nativeElement.className);

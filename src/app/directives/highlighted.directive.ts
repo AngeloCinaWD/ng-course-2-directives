@@ -1,4 +1,12 @@
-import { Directive, ElementRef, HostBinding, Input } from "@angular/core";
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from "@angular/core";
 
 // in una direttiva c'è il decorator @Directive
 // il selector è il nome con cui verrà utilizzta la direttiva, passandolo come attributo all'elemento nel template
@@ -11,6 +19,12 @@ export class HighlightedDirective {
   // utilizzo il decoratore @Input('nomeproprietà')
   @Input("highlighted")
   isHighlighted: boolean = false;
+
+  // EVENTEMITTER
+  // una direttiva può emettere eventi come fa un componente
+  // creo un evento e lo emetterò quando cambia il valore di isHighlighted
+  @Output("toggleIsHighLighted")
+  toggleIsHighLighted = new EventEmitter<Boolean>();
 
   // proprietà ElementRef che riferisce all'elemento DOM a cui è applicata la direttiva
   constructor(private elRef: ElementRef) {
@@ -40,9 +54,9 @@ export class HighlightedDirective {
   // metodo che ritorna il valore dell'@Input isHighlighted passato dall'esterno
   // class l'ho passato per far funzionare il tutto, class è una shorthand che mi permette di accedere alle classi di un elemento
   // posso utilizzarlo anche per passare classi, class.nomeClasse e ritornare il valore true
-  @HostBinding("class")
+  @HostBinding("class.highlightedMouse")
   get getValueIsHighlighted() {
-    return console.log(this.isHighlighted);
+    return this.isHighlighted;
   }
 
   // possiamo settare attributi dell'elemento tramite @HostBinding, utilizzando l'oggetto attr (https://developer.mozilla.org/en-US/docs/Web/API/Attr) che ha un elemento DOM
@@ -61,4 +75,26 @@ export class HighlightedDirective {
   //   console.log(classes);
   //   return classes.add("highlighted");
   // }
+
+  // @HOSTLISTENER DECORATOR
+  // ascoltare eventi in una direttiva, in argomento il nome dell'evento che si scatena sull'elemento
+  // non devono essere metodi GET, questi vengono richiamati al verificarsi dell'evento
+  // modificando il valore dell'@Input verrà chiamato il metodo get getValueIsHighlighted() che rotorna vero o falso per aggiungere una classe tramite shorthand class.nomeClasse
+  // possiamo passare un array come secondo argomento del decorator per passare argomenti al metodo
+  // uno è $event che ci dà informazioni sull'evento triggerato, il secondo lo sto passando per prova e gli devo assegnare il valore nel metodo
+  @HostListener("mouseover", ["$event", "ciao"])
+  mouseOver($event: MouseEvent, elRef: ElementRef) {
+    elRef = this.elRef;
+    console.log(elRef);
+    console.log($event);
+
+    this.isHighlighted = true;
+    this.toggleIsHighLighted.emit(this.isHighlighted);
+  }
+
+  @HostListener("mouseleave")
+  mouseLeave() {
+    this.isHighlighted = false;
+    this.toggleIsHighLighted.emit(this.isHighlighted);
+  }
 }

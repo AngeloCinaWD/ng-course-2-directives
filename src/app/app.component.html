@@ -12,8 +12,17 @@
 <!-- l'elemento a cui viene applicata la directive è chiamato Host Element -->
 <!-- per passare un valore alla direttiva metto fra quadre il nome della direttiva che riferisce all'@Input indicato nella direttiva isHighlighted-->
 <div class="courses" *ngIf="courses[0] as course" #prova>
-  <course-card
+  <!-- tag per passare valore all'@Input isHighlighted-->
+  <!-- <course-card
     [highlighted]="true"
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course"
+  > -->
+  <!-- tag senza passare valore all'@Input isHighlighted, di default sarà false come indicato nel .ts-->
+  <!-- EVENTEMITTER aggiungo un ascolatore per l'evento custom toggleIsHighLighted-->
+  <course-card
+    highlighted
+    (toggleIsHighLighted)="onToggle($event)"
     (courseSelected)="onCourseSelected($event)"
     [course]="course"
   >
