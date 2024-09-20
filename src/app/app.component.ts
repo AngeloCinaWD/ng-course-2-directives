@@ -21,9 +21,17 @@ export class AppComponent implements AfterViewInit {
   @ViewChildren(CourseCardComponent, { read: ElementRef })
   cards: QueryList<ElementRef>;
 
+  @ViewChild("prova")
+  prova: ElementRef;
+
   constructor() {}
 
-  ngAfterViewInit() {}
+  // da qui se vedo l'oggetto nativeElement corrispondente all'elemento trovo fra le sue proprietà classList che mi elenca le classi ad esso associate (un array di stringhe), mentre className mi restituisce una stringa con le classi
+  ngAfterViewInit() {
+    console.log(this.prova.nativeElement.classList);
+    console.log(this.prova.nativeElement.className);
+    console.log(this.cards.toArray()[0].nativeElement.classList);
+  }
 
   onCourseSelected(course: Course) {}
 }

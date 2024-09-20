@@ -9,8 +9,14 @@
 <!-- Le ATTRIBUTE DIRECTIVES sono ad esempio NgClass, NgStyle ed NgModel, cambiano l'aspetto o il comportamento di un elemento, componente o altre direttive -->
 <!-- per creare una direttiva custom utilizzo il comando ng g directive directives/highlighted, sto generando una direttiva chiamata highlighted nella cartella directives nella cartella src/app -->
 <!-- una direttiva è una classe ts -->
-<div class="courses" *ngIf="courses[0] as course">
-  <course-card (courseSelected)="onCourseSelected($event)" [course]="course">
+<!-- l'elemento a cui viene applicata la directive è chiamato Host Element -->
+<!-- per passare un valore alla direttiva metto fra quadre il nome della direttiva che riferisce all'@Input indicato nella direttiva isHighlighted-->
+<div class="courses" *ngIf="courses[0] as course" #prova>
+  <course-card
+    [highlighted]="true"
+    (courseSelected)="onCourseSelected($event)"
+    [course]="course"
+  >
     <course-image [src]="course.iconUrl"></course-image>
 
     <div class="course-description">
