@@ -30,6 +30,9 @@ export class HighlightedDirective {
   @Output("toggleIsHighLighted")
   toggleIsHighLighted = new EventEmitter<Boolean>();
 
+  // proprietà con valore di prova da utilizzare nell'array dell'evento mouseleave
+  proprietaProvaMouseLeave: number = 100;
+
   // proprietà ElementRef che riferisce all'elemento DOM a cui è applicata la direttiva
   constructor(private elRef: ElementRef) {
     console.log(elRef.nativeElement);
@@ -84,20 +87,24 @@ export class HighlightedDirective {
   // ascoltare eventi in una direttiva, in argomento il nome dell'evento che si scatena sull'elemento
   // non devono essere metodi GET, questi vengono richiamati al verificarsi dell'evento
   // modificando il valore dell'@Input verrà chiamato il metodo get getValueIsHighlighted() che ritorna vero o falso per aggiungere una classe tramite shorthand class.nomeClasse
-  // possiamo passare un array come secondo argomento del decorator per passare argomenti al metodo
-  // uno è $event che ci dà informazioni sull'evento triggerato, il secondo lo sto passando per prova e gli devo assegnare il valore nel metodo
-  @HostListener("mouseover", ["$event", "ciao"])
-  mouseOver($event: MouseEvent, elRef: ElementRef) {
-    elRef = this.elRef;
+  // possiamo passare un array come secondo argomento del decorator per passare valori agli argomenti al metodo, i valori vengono assegnati in ordine agli argomenti come inseriti nell'array e devono essere passati come stringhe
+  // uno è $event che ci dà informazioni sull'evento triggerato, il secondo è una stringa, l'argomento prova avrà valore 'ciao'
+  // il terzo valore passato nell'array verrà letto come this.elRef e cioè verrà preso il valore della proprietà elRef dichiarata nel costruttore della direttiva
+  @HostListener("mouseover", ["$event", "'ciao'", "this.elRef"])
+  mouseOver(evento: MouseEvent, prova: string, elRef: ElementRef) {
     console.log(elRef);
-    console.log($event);
+    console.log(evento);
+    console.log(this.isHighlighted);
+    console.log(prova);
 
     this.isHighlighted = true;
     this.toggleIsHighLighted.emit(this.isHighlighted);
   }
 
-  @HostListener("mouseleave")
-  mouseLeave() {
+  @HostListener("mouseleave", ["this.proprietaProvaMouseLeave"])
+  mouseLeave(proprietaProva: number) {
+    console.log(proprietaProva);
+
     this.isHighlighted = false;
     this.toggleIsHighLighted.emit(this.isHighlighted);
   }

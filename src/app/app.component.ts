@@ -37,6 +37,7 @@ export class AppComponent implements AfterViewInit {
 
   // METODO RICHIAMATO DALL'EVENTO CUSTOM toggleIsHighLighted DELLA DIRETTIVA highlighted
   onToggle($event) {
+    console.log("evento emesso");
     console.log($event);
   }
 
