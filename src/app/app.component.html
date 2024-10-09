@@ -21,7 +21,7 @@
   > -->
   <!-- tag senza passare valore all'@Input isHighlighted, di default sarà false come indicato nel .ts-->
   <!-- EVENTEMITTER aggiungo un ascolatore per l'evento custom toggleIsHighLighted-->
-  <!-- EXPORTAS per fare rriferimento direttamente ad una direttiva devo creare una template reference ed assegnarle il nome di esportazione della direttiva -->
+  <!-- EXPORTAS, proprietà exportAs definita nella directive.ts, per fare riferimento direttamente ad una direttiva devo creare una template reference ed assegnarle il nome di esportazione della direttiva -->
   <course-card
     [highlighted]="false"
     (toggleIsHighLighted)="onToggle($event)"
@@ -29,10 +29,13 @@
     (courseSelected)="onCourseSelected($event)"
     [course]="course"
   >
-    <!-- creiamo una DIRETTIVA STRUTTURALE che chiamiamo *ngxUnless, tranne, determinerà se l'oggetto si vedrà o meno ma con la logica contraria a quella di *ngIf, quindi se la condizione è falsa -->
-    <!-- per convenzione si utilizza il prefisso ngx per indicare che una direttiva non è di angular core ma è custom -->
+    <!-- STAR SINTAX -->
     <!-- l'* è una shorthand che sta a significare che l'elemento a cui viene applicata la direttiva è come se venga inserito in un tag ng-template e che a questo venga applicata la direttiva in modo normale e se la condizione è rispettata viene renderizzato-->
-    <!-- <ng-template [direttiva]></ng-template> -->
+    <!-- creiamo una DIRETTIVA STRUTTURALE che chiamiamo *ngxUnless, tranne, determinerà se l'oggetto si vedrà o meno ma con la logica contraria a quella di *ngIf, quindi se la condizione fornita per applicare o no la direttiva è falsa, *ngxUnless="condizione_che_deve_essere_falsa" -->
+    <!-- per generare una direttiva runniamo il comando ng generate directive directives/ngx-unless -->
+    <!-- per convenzione si utilizza il prefisso ngx per indicare che una direttiva non è di angular core ma è custom, angular extended directive -->
+    <!-- quando si utilizza una direttiva strutturale è come se il codice a cui viene applicata la direttiva venga inserito in un ng-template, cioè un blocco di codice che viene renderizzato da angular solo quando serve -->
+    <!-- esempio del component course-card con ng-if in ng-template -->
 
     <course-image [src]="course.iconUrl"></course-image>
     <!-- UTILIZZO DEL METODO TOGGLE DELLA DIRETTIVA -->
@@ -42,3 +45,30 @@
     </div>
   </course-card>
 </div>
+
+<!-- esempio del component course-card con ngIf in ng-template -->
+<!-- la direttiva ngIf va applicata tra parentesi quadre -->
+<!-- la variabile course la passiamo tramite ng-template con la sintassi let- e non definiamo nessun valore, in questo caso prende il valore direttamente dall'espressione della condizione dell'ngIf -->
+<ng-template [ngIf]="courses[0]" let-course>
+  <div class="courses">
+    <course-card
+      [highlighted]="false"
+      (toggleIsHighLighted)="onToggle($event)"
+      #highlighter="direttivaHL"
+      (courseSelected)="onCourseSelected($event)"
+      [course]="course"
+    >
+      <!-- applichiamo la direttiva custom ngxUnless all'immagine di questo componente -->
+      <!-- dato che vogliamo che l'immagine si veda se la condizione è falsa, negheremo la presenza dell'url con il ! -->
+      <!-- per poter applicare la direttiva dobbiamo creare un'input property nella classe della direttiva che abbia lo stesso nome della direttiva e che sia un metodo set, questo metodo riceve come argomento la condizione, un booleano -->
+      <!-- questo perchè pensando alla versione meno estesa, quella con l'ng-template, la direttiva viene passata come un attributo che ha un valore [ngxUnless]="" -->
+      <course-image
+        [src]="course.iconUrl"
+        *ngxUnless="!course.iconUrl"
+      ></course-image>
+      <div class="course-description" (dblclick)="highlighter.toggle()">
+        {{ course.longDescription }}
+      </div>
+    </course-card>
+  </div>
+</ng-template>

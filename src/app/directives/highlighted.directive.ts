@@ -34,6 +34,8 @@ export class HighlightedDirective {
   proprietaProvaMouseLeave: number = 100;
 
   // proprietà ElementRef che riferisce all'elemento DOM a cui è applicata la direttiva
+  // https://stackoverflow.com/questions/53374430/difference-between-elementref-and-templateref-in-angular4
+  // https://www.youtube.com/watch?v=uQqp1z7FpJY&ab_channel=AngularConnect
   constructor(private elRef: ElementRef) {
     console.log(elRef.nativeElement);
     console.log(elRef.nativeElement.style);
