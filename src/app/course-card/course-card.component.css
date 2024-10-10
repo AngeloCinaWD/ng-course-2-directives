@@ -22,7 +22,15 @@
   font-weight: bold;
 }
 
-.course-card .course-description {
+/* qui c'è un problema perchè questa classe non è stata applicata nel componente, ma in app.component.html perchè questo contenuto viene passato tramite <ng-content> che renderizza codice html nel content del tag del componente, quindi tramite content projection */
+/* quindi il codice html renderizzato non riferisce al codice _nghost del componente ma a quello di app-root e quindi il css non viene applicato */
+/* se spostassi la propretà css .course.description in app.component.css funzionerebbe */
+/* per farlo funzionare qui dobbiamo bypassare il meccanismo di View Encapsulation, in modo da applicare questa classe anche se l'elemento non fa parte del componente */
+/* utilizzo la feature ::ng-deep */
+/*sto dicendo ad angular che tutto quello che viene dopo la feature ::ng-deep non deve essere reso specifico per il modello del componente */
+
+/* .course-card .course-description { */
+.course-card ::ng-deep .course-description {
   max-width: 360px;
   margin: 0 auto;
   margin-top: 15px;
