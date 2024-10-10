@@ -7,6 +7,14 @@
   display: block;
 }
 
+/* voglio creare una proprietà css che venga applicata al componente ma che dipenda da una classe passata non al componente direttamente ma all'esterno, ad esempio al suo parent  */
+/* creo una classe salmon-theme che applico in app.component.html */
+/* per fare in modo che questa classe diventi specifica per il mio componente (altrimenti essendo passata dall'esterno non verrebbe vista) utilizzo la feature :host-context(selettore classe) */
+
+:host-context(.salmon-theme) .course-card {
+  background: lightsalmon;
+}
+
 /* qui course-card è una classe non l'elemento html */
 .course-card {
   margin-bottom: 40px;

@@ -12,7 +12,8 @@
 <!-- l'elemento a cui viene applicata la directive è chiamato Host Element -->
 <!-- per passare un valore alla direttiva metto fra quadre il nome della direttiva che riferisce all'@Input indicato nella direttiva isHighlighted-->
 <!-- STRUCTURAL DIRECTIVES, contrassegnate dall'*, ci permettono di modificare il DOM, aggiungendo o togliendo elementi -->
-<div class="courses" *ngIf="courses[0] as course" #prova>
+<!-- classe salmon-theme passata dal parent e resa specifica per il componente course-card tramite feature :host-context() -->
+<div class="courses salmon-theme" *ngIf="courses[0] as course" #prova>
   <!-- tag per passare valore all'@Input isHighlighted-->
   <!-- <course-card
     [highlighted]="true"
