@@ -24,6 +24,8 @@ export class HighlightedDirective {
   @Input("highlighted")
   isHighlighted: boolean = false;
 
+  isHighlightedMouse: boolean = false;
+
   // EVENTEMITTER
   // una direttiva può emettere eventi come fa un componente
   // creo un evento e lo emetterò quando cambia il valore di isHighlighted
@@ -49,23 +51,28 @@ export class HighlightedDirective {
   // fra le proprietà utili c'è style che elenca tutte gli stili css (ad esempio border, backgorund)
   // se volessi aggiungere un bordo colorato di 1px nell'@HostBinding passerei come nome della proprietà da modificare "style.border" e return "1px solid green"
 
-  @HostBinding("className")
+  // @HostBinding("className")
+  // get cssClasses() {
+  //   return "highlighted course-card";
+  // }
+
+  @HostBinding("class.highlighted")
   get cssClasses() {
-    return "highlighted course-card";
+    return this.isHighlighted;
   }
 
   // mettendo più metodi posso far fare più cose alla direttiva
-  @HostBinding("style.border")
-  get cssBorder() {
-    return "3px solid green";
-  }
+  // @HostBinding("style.border")
+  // get cssBorder() {
+  //   return "3px solid green";
+  // }
 
   // metodo che ritorna il valore dell'@Input isHighlighted passato dall'esterno
   // class l'ho passato per far funzionare il tutto, class è una shorthand che mi permette di accedere alle classi di un elemento
   // posso utilizzarlo anche per passare classi, class.nomeClasse e ritornare il valore true
   @HostBinding("class.highlightedMouse")
   get getValueIsHighlighted() {
-    return this.isHighlighted;
+    return this.isHighlightedMouse;
   }
 
   // possiamo settare attributi dell'elemento tramite @HostBinding, utilizzando l'oggetto attr (https://developer.mozilla.org/en-US/docs/Web/API/Attr) che ha un elemento DOM
@@ -99,7 +106,8 @@ export class HighlightedDirective {
     console.log(this.isHighlighted);
     console.log(prova);
 
-    this.isHighlighted = true;
+    this.isHighlighted = false;
+    this.isHighlightedMouse = true;
     this.toggleIsHighLighted.emit(this.isHighlighted);
   }
 
@@ -107,12 +115,14 @@ export class HighlightedDirective {
   mouseLeave(proprietaProva: number) {
     console.log(proprietaProva);
 
-    this.isHighlighted = false;
+    this.isHighlighted = true;
+    this.isHighlightedMouse = false;
     this.toggleIsHighLighted.emit(this.isHighlighted);
   }
 
   // METODO CHE UTILIZZERO' NEL TEMPLATE
   toggle() {
+    this.isHighlightedMouse = false;
     this.isHighlighted = !this.isHighlighted;
     this.toggleIsHighLighted.emit(this.isHighlighted);
   }

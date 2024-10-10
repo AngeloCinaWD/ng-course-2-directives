@@ -23,7 +23,7 @@
   <!-- EVENTEMITTER aggiungo un ascolatore per l'evento custom toggleIsHighLighted-->
   <!-- EXPORTAS, proprietà exportAs definita nella directive.ts, per fare riferimento direttamente ad una direttiva devo creare una template reference ed assegnarle il nome di esportazione della direttiva -->
   <course-card
-    [highlighted]="false"
+    [highlighted]="true"
     (toggleIsHighLighted)="onToggle($event)"
     #highlighter="direttivaHL"
     (courseSelected)="onCourseSelected($event)"

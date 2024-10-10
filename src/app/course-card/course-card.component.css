@@ -1,9 +1,13 @@
-/* se sposto qui le proprietà CSS dal file style.css queste saranno funzionali solo al template del component */
-/* questo avviene perchè angular crea degli identificatori univoci per ogni componente e (es. _ng-content-c1) e li applicherà ad ogni elemento html che compone il componente */
-course-card {
+/* per riferirsi all'elemento host devo utilizzare la keyword :host */
+/* questo ci permette di collegare tutte le proprietà css ad un solo codice univoco che angular crea per identificare il componente */
+/* ad esempio codice _nghost-ng-c01, tutti gli elementi all'interno del template del componente che avranno un codice _ngcontent-ng-c01 vuol dire che si riferiscono a quell'host element  */
+
+:host {
+  /* course-card { */
   display: block;
 }
 
+/* qui course-card è una classe non l'elemento html */
 .course-card {
   margin-bottom: 40px;
   text-align: center;
@@ -30,39 +34,28 @@ course-card {
   margin-top: 10px;
 }
 
-.course-card.beginner {
-  background: lightsalmon;
-}
-
-course-card.is-first {
+:host.is-first {
+  /* course-card.is-first { */
   border-top: 2px solid grey;
   padding-top: 20px;
 }
 
-course-card.is-last {
+:host.is-last {
+  /* course-card.is-last { */
   border-bottom: 2px solid grey;
   padding-top: 20px;
 }
 
-course-card.is-even {
+:host.is-even {
+  /* course-card.is-even { */
   background: lightgray;
 }
 
-course-card.is-odd {
+:host.is-odd {
+  /* course-card.is-odd { */
   background: lightcyan;
 }
 
-.course-category {
-  margin-top: 15px;
-}
-
-.category {
-  margin-top: 15px;
-  background: lightcyan;
-  font-size: 14px;
-  color: grey;
-  border: 1px solid grey;
-  border-radius: 4px;
-  padding: 2px 3px;
-  display: inline;
+.course-card.beginner {
+  background: lightsalmon;
 }

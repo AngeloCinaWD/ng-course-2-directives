@@ -57,7 +57,7 @@ course-card.is-even {
 
 course-card.is-odd {
   background: lightcyan;
-}
+} */
 
 .course-category {
   margin-top: 15px;
@@ -72,7 +72,7 @@ course-card.is-odd {
   border-radius: 4px;
   padding: 2px 3px;
   display: inline;
-} */
+}
 
 .demo {
   max-width: 300px;
