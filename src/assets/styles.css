@@ -1,4 +1,8 @@
-course-card {
+/* rimuovo tutte le proprietà css che si riferiscono solo al componente course-card e le metto nel file css del componente, non saranno più utilizzabili da altro html che non sia quello del componente course-card */
+
+/* meccanismo di isolamento degli stili css */
+
+/* course-card {
   display: block;
 }
 
@@ -26,7 +30,7 @@ course-card {
 .course-card img {
   border-radius: 4px;
   margin-top: 10px;
-}
+} */
 
 button {
   margin-top: 20px;
@@ -37,7 +41,7 @@ button {
   border-radius: 4px;
 }
 
-course-card.is-first {
+/* course-card.is-first {
   border-top: 2px solid grey;
   padding-top: 20px;
 }
@@ -68,7 +72,7 @@ course-card.is-odd {
   border-radius: 4px;
   padding: 2px 3px;
   display: inline;
-}
+} */
 
 .demo {
   max-width: 300px;

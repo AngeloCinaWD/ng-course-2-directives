@@ -1,6 +1,68 @@
-
-.course-card.beginner {
-    background: lightsalmon;
+/* se sposto qui le proprietà CSS dal file style.css queste saranno funzionali solo al template del component */
+/* questo avviene perchè angular crea degli identificatori univoci per ogni componente e (es. _ng-content-c1) e li applicherà ad ogni elemento html che compone il componente */
+course-card {
+  display: block;
 }
 
+.course-card {
+  margin-bottom: 40px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 20px 0;
+  box-shadow: 0 1px 16px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.14),
+    0 4px 8px -1px rgba(0, 0, 0, 0.12);
+}
 
+.course-card .course-title {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.course-card .course-description {
+  max-width: 360px;
+  margin: 0 auto;
+  margin-top: 15px;
+  user-select: none;
+}
+
+.course-card img {
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.course-card.beginner {
+  background: lightsalmon;
+}
+
+course-card.is-first {
+  border-top: 2px solid grey;
+  padding-top: 20px;
+}
+
+course-card.is-last {
+  border-bottom: 2px solid grey;
+  padding-top: 20px;
+}
+
+course-card.is-even {
+  background: lightgray;
+}
+
+course-card.is-odd {
+  background: lightcyan;
+}
+
+.course-category {
+  margin-top: 15px;
+}
+
+.category {
+  margin-top: 15px;
+  background: lightcyan;
+  font-size: 14px;
+  color: grey;
+  border: 1px solid grey;
+  border-radius: 4px;
+  padding: 2px 3px;
+  display: inline;
+}

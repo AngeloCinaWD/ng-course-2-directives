@@ -20,6 +20,8 @@ import { CourseImageComponent } from "../course-image/course-image.component";
 @Component({
   selector: "course-card",
   templateUrl: "./course-card.component.html",
+  // lo style css scritto nel file css del componente riferisce solo al componente stesso
+  // si dice INCAPSULAMENTO DELLA VIEW, VIEW ENCAPSULATION
   styleUrls: ["./course-card.component.css"],
 })
 export class CourseCardComponent
